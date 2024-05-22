@@ -3,6 +3,7 @@ module github.com/r2day/f9z
 go 1.21.5
 
 require (
+	github.com/open4go/log v0.0.8
 	github.com/open4go/model v0.0.15
 	github.com/open4go/req5rsp v0.1.15
 	go.mongodb.org/mongo-driver v1.15.0
@@ -18,7 +19,6 @@ require (
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
-	github.com/open4go/log v0.0.8 // indirect
 	github.com/open4go/r3time v0.0.3 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
