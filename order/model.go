@@ -45,6 +45,8 @@ type Model struct {
 	Buckets []*Buckets `json:"buckets" bson:"buckets"`
 	// 支付信息
 	Pay pay.PayInfo `json:"pay" bson:"pay"`
+	// 价格信息
+	Price PriceInfo `json:"price" bson:"price"`
 }
 
 // IdentityInfo 标识信息
@@ -59,6 +61,19 @@ type IdentityInfo struct {
 	OrderNo string `json:"order_no" bson:"order_no"`
 	// 座位号 (自主选择/店铺分配）
 	TableNo string `json:"table_no" bson:"table_no"`
+}
+
+type PriceInfo struct {
+	// 原价(单位元）
+	OriginalPrice string `json:"original_price" bson:"original_price"`
+	//Sale price 特惠價(单位元）
+	SalePrice string `json:"sale_price" bson:"sale_price"`
+	//Reduced price 減價(单位元）
+	ReducedPrice string `json:"reduced_price" bson:"reduced_price"`
+	//Retail price 零售價(单位元）
+	RetailPrice string `json:"retail_price" bson:"retail_price"`
+	// 支付金额(单位：分）
+	PayPrice int64 `json:"pay_price" bson:"pay_price"`
 }
 
 // StatusTimePoint 订单状态关键时间点
