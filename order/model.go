@@ -81,7 +81,7 @@ type StatusTimePoint struct {
 	// 订单创建时间
 	CreatedAt int64 `json:"created_at" bson:"created_at"`
 	// 支付中
-	PayAt int `json:"pay_at" bson:"pay_at"`
+	PayAt int64 `json:"pay_at" bson:"pay_at"`
 	// 	PayedAt 支付成功时间
 	PayedAt int64 `json:"payed_at" bson:"payed_at"`
 	// 	ReviewAt 评价时间
