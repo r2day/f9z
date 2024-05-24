@@ -28,6 +28,7 @@ type Model struct {
 	// 订单来源(系统根据订单来源终端自动赋值）
 }
 
+// PayInfo 支付信息
 type PayInfo struct {
 	// 预支付信息
 	PreTrade PrepareTrade `json:"prepare_trade" bson:"prepare_trade"`
@@ -37,6 +38,8 @@ type PayInfo struct {
 	PayAmount int64 `json:"pay_amount" bson:"pay_amount"`
 	// 第三方支付单号
 	TransactionID string `json:"transaction_id" bson:"transaction_id"`
+	// 支付中
+	PayAt int `json:"pay_at" bson:"pay_at"`
 	// 支付成功时间
 	PayedAt int `json:"payed_at" bson:"payed_at"`
 	// 退款成功时间
