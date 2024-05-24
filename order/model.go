@@ -80,7 +80,9 @@ type PriceInfo struct {
 type StatusTimePoint struct {
 	// 订单创建时间
 	CreatedAt int64 `json:"created_at" bson:"created_at"`
-	// 	PayedAt 支付时间
+	// 支付中
+	PayAt int `json:"pay_at" bson:"pay_at"`
+	// 	PayedAt 支付成功时间
 	PayedAt int64 `json:"payed_at" bson:"payed_at"`
 	// 	ReviewAt 评价时间
 	ReviewAt int64 `json:"review_at" bson:"review_at"`
