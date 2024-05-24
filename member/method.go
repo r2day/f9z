@@ -7,11 +7,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (m *Model) GetByOrderID(id string) ([]*Model, error) {
+func (m *Model) GetByWxLoginID(id string) ([]*Model, error) {
 
 	results := make([]*Model, 0)
 	coll := m.Context.Handler.Collection(m.Context.Collection)
-	filter := bson.D{{Key: "identity.order_no", Value: id}}
+	filter := bson.D{{Key: "identity.wx_login_id", Value: id}}
 
 	// 获取数据列表
 	cursor, err := coll.Find(m.Context.Context, filter)

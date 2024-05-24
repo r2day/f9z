@@ -44,6 +44,8 @@ type IdentityInfo struct {
 	Birthday string `json:"birthday" bson:"birthday"`
 	// 性别
 	Gender UserGender `json:"gender" bson:"gender"`
+	// 微信登陆信息
+	WxLoginID string `json:"wx_login_id" bson:"wx_login_id"`
 }
 
 type PriceInfo struct {
