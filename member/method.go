@@ -7,9 +7,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (m *Model) GetByWxLoginID(id string) ([]*Model, error) {
+func (m *Model) GetByWxLoginID(id string) (*Model, error) {
 
-	results := make([]*Model, 0)
+	result := new(Model)
 	coll := m.Context.Handler.Collection(m.Context.Collection)
 	filter := bson.D{{Key: "identity.wx_login_id", Value: id}}
 
@@ -23,9 +23,9 @@ func (m *Model) GetByWxLoginID(id string) ([]*Model, error) {
 		log.Log().WithField("id", id).Error(err)
 		return nil, err
 	}
-	if err = cursor.All(m.Context.Context, &results); err != nil {
+	if err = cursor.All(m.Context.Context, &result); err != nil {
 		log.Log().WithField("id", id).Error(err)
 		return nil, err
 	}
-	return results, nil
+	return result, nil
 }
