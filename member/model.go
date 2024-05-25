@@ -55,9 +55,9 @@ type LoginInfo struct {
 	// 登陆次数
 	Counter uint64 `json:"counter" bson:"counter"`
 	// 上次登陆时间
-	LastLoginAt uint64 `json:"last_login_at" bson:"last_login_at"`
+	LastLoginAt int64 `json:"last_login_at" bson:"last_login_at"`
 	// 当前登陆时间
-	LoginAt uint64 `json:"login_at" bson:"login_at"`
+	LoginAt int64 `json:"login_at" bson:"login_at"`
 	// 当前登陆IP
 	LoginIp string `json:"login_ip" bson:"login_ip"`
 	// 上次登陆IP
