@@ -2,7 +2,6 @@ package member
 
 import (
 	"github.com/open4go/model"
-	"github.com/r2day/f9z/product"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -27,9 +26,10 @@ type Model struct {
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	// 用户来源
 	From UserFrom `json:"source" bson:"source"`
-	// 订单标识信息
-	Identity IdentityInfo `json:"identity" bson:"identity"`
 	// 客户信息
+	Identity IdentityInfo `json:"identity" bson:"identity"`
+	// 登陆审计信息
+	Login LoginInfo `json:"login" bson:"login"`
 }
 
 // IdentityInfo 标识信息
@@ -48,71 +48,12 @@ type IdentityInfo struct {
 	WxLoginID string `json:"wx_login_id" bson:"wx_login_id"`
 }
 
-type PriceInfo struct {
-	// 原价(单位元）
-	OriginalPrice string `json:"original_price" bson:"original_price"`
-	//Sale price 特惠價(单位元）
-	SalePrice string `json:"sale_price" bson:"sale_price"`
-	//Reduced price 減價(单位元）
-	ReducedPrice string `json:"reduced_price" bson:"reduced_price"`
-	//Retail price 零售價(单位元）
-	RetailPrice string `json:"retail_price" bson:"retail_price"`
-	// 支付金额(单位：分）
-	PayPrice int64 `json:"pay_price" bson:"pay_price"`
-}
-
-// StatusTimePoint 订单状态关键时间点
-type StatusTimePoint struct {
-	// 订单创建时间
-	CreatedAt int64 `json:"created_at" bson:"created_at"`
-	// 支付中
-	PayAt int64 `json:"pay_at" bson:"pay_at"`
-	// 	PayedAt 支付成功时间
-	PayedAt int64 `json:"payed_at" bson:"payed_at"`
-	// 	ReviewAt 评价时间
-	ReviewAt int64 `json:"review_at" bson:"review_at"`
-	// 	CompletedAt 完成时间
-	CompletedAt int64 `json:"completed_at" bson:"completed_at"`
-}
-
-// CustomerInfo 客户信息
-type CustomerInfo struct {
-	Mobile  string `json:"mobile" bson:"mobile"`
-	Name    string `json:"name" bson:"name"`
-	Id      string `json:"id" bson:"id"`
-	Account string `json:"account" bson:"account"`
-}
-
-// MerchantInfo 商户信息
-type MerchantInfo struct {
-	// 联系方式
-	Mobile string `json:"mobile" bson:"mobile"`
-	// 名称
-	Name string `json:"name" bson:"name"`
-	// 唯一标识
-	Id string `json:"id" bson:"id"`
-	// 位置
-	Address string `json:"address" bson:"address"`
-}
-
-// Buckets 商品信息
-type Buckets struct {
-	// 商品id
-	ID string `json:"id"`
-	// 名称
-	Name string `json:"name"`
-	// 数量
-	Number int `json:"number"`
-	// 原始价格
-	OriginAmount string `json:"origin_amount"  bson:"origin_amount"`
-	// 单位
-	Unit string `json:"unit"  bson:"unit"`
-	// 属性
-	Property []product.PropertyInfo `json:"property"  bson:"property"`
-	// 图片
-	Image string `json:"image"  bson:"image"`
-	// 数量
-	Amount string `json:"amount"  bson:"amount"`
+// LoginInfo 登陆信息
+type LoginInfo struct {
+	// 登陆时长
+	Times uint64 `json:"times" bson:"times"`
+	// 登陆次数
+	Counter uint64 `json:"counter" bson:"counter"`
 }
 
 // ResourceName 返回资源名称
