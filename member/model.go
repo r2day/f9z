@@ -54,6 +54,14 @@ type LoginInfo struct {
 	Times uint64 `json:"times" bson:"times"`
 	// 登陆次数
 	Counter uint64 `json:"counter" bson:"counter"`
+	// 上次登陆时间
+	LastLoginAt uint64 `json:"last_login_at" bson:"last_login_at"`
+	// 当前登陆时间
+	LoginAt uint64 `json:"login_at" bson:"login_at"`
+	// 当前登陆IP
+	LoginIp string `json:"login_ip" bson:"login_ip"`
+	// 上次登陆IP
+	LastLoginIp string `json:"last_login_ip" bson:"last_login_ip"`
 }
 
 // ResourceName 返回资源名称
