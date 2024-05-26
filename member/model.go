@@ -46,6 +46,8 @@ type IdentityInfo struct {
 	Gender UserGender `json:"gender" bson:"gender"`
 	// 微信登陆信息
 	WxLoginID string `json:"wx_login_id" bson:"wx_login_id"`
+	// 手机号
+	Phone string `json:"phone" bson:"phone"`
 }
 
 // LoginInfo 登陆信息
