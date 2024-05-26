@@ -42,7 +42,7 @@ type IdentityInfo struct {
 	UserName string `json:"user_name" bson:"user_name"`
 	// 生日
 	Birthday string `json:"birthday" bson:"birthday"`
-	// 加入时间
+	// 加入时间(注册时间）
 	JoinAt string `json:"join_at" bson:"join_at"`
 	// 性别
 	Gender UserGender `json:"gender" bson:"gender"`
@@ -50,6 +50,8 @@ type IdentityInfo struct {
 	WxLoginID string `json:"wx_login_id" bson:"wx_login_id"`
 	// 手机号
 	Phone string `json:"phone" bson:"phone"`
+	// 注册ip
+	RegisterIP string `json:"register_ip" bson:"register_ip"`
 }
 
 // LoginInfo 登陆信息
