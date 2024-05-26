@@ -52,6 +52,8 @@ type IdentityInfo struct {
 	Phone string `json:"phone" bson:"phone"`
 	// 注册ip
 	RegisterIP string `json:"register_ip" bson:"register_ip"`
+	// 注册地区
+	RegisterArea string `json:"register_area" bson:"register_area"`
 }
 
 // LoginInfo 登陆信息
