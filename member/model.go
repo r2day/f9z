@@ -42,6 +42,8 @@ type IdentityInfo struct {
 	UserName string `json:"user_name" bson:"user_name"`
 	// 生日
 	Birthday string `json:"birthday" bson:"birthday"`
+	// 加入时间
+	JoinAt string `json:"join_at" bson:"join_at"`
 	// 性别
 	Gender UserGender `json:"gender" bson:"gender"`
 	// 微信登陆信息
