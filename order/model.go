@@ -61,6 +61,8 @@ type IdentityInfo struct {
 	OrderNo string `json:"order_no" bson:"order_no"`
 	// 座位号 (自主选择/店铺分配）
 	TableNo string `json:"table_no" bson:"table_no"`
+	// 当前排队号
+	CurrentPos int64 `json:"current_pos" bson:"-"`
 }
 
 type PriceInfo struct {
