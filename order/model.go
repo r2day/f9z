@@ -110,6 +110,15 @@ type MerchantInfo struct {
 	Id string `json:"id" bson:"id"`
 	// 位置
 	Address string `json:"address" bson:"address"`
+	// 地理位置(可以快速的让用户进行订单导航）
+	// 以及外卖订单的发布
+	LBS LBSInfo `json:"lbs" bson:"lbs"`
+}
+
+// LBSInfo 地理位置信息
+type LBSInfo struct {
+	Longitude float64 `json:"longitude"  bson:"longitude"`
+	Latitude  float64 `json:"latitude"  bson:"latitude"`
 }
 
 // Buckets 商品信息
