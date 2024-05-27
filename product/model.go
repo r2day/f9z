@@ -52,6 +52,7 @@ type SpecsInfo struct {
 type PropertyInfo struct {
 	IsOpenCheckbox bool              `json:"is_open_checkbox"`
 	Id             int               `json:"id"`
+	Price          int               `json:"price"`
 	Values         []PropertySetting `json:"values"`
 	Name           string            `json:"name"`
 	Desc           *string           `json:"desc,omitempty"`

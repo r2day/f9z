@@ -128,17 +128,19 @@ type Buckets struct {
 	// 名称
 	Name string `json:"name"`
 	// 数量
-	Number int `json:"number"`
+	Number int `json:"number"  bson:"number"`
+	// 单价
+	Price int `json:"price"  bson:"price"`
 	// 原始价格
 	OriginAmount string `json:"origin_amount"  bson:"origin_amount"`
 	// 单位
 	Unit string `json:"unit"  bson:"unit"`
-	// 属性
+	// 属性列表
 	Property []product.PropertyInfo `json:"property"  bson:"property"`
+	// 单品属性简述
+	PropsText string `json:"props_text"  bson:"props_text"`
 	// 图片
 	Image string `json:"image"  bson:"image"`
-	// 数量
-	Amount string `json:"amount"  bson:"amount"`
 }
 
 // ResourceName 返回资源名称
