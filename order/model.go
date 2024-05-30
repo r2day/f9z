@@ -98,6 +98,7 @@ type CustomerInfo struct {
 	Name    string `json:"name" bson:"name"`
 	Id      string `json:"id" bson:"id"`
 	Account string `json:"account" bson:"account"`
+	Avatar  string `json:"avatar" bson:"avatar"`
 }
 
 // MerchantInfo 商户信息
