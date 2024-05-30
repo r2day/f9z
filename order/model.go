@@ -144,6 +144,16 @@ type Buckets struct {
 	Image string `json:"image"  bson:"image"`
 }
 
+// PendingOrder 数据展示
+type PendingOrder struct {
+	// 订单来源(系统根据订单来源终端自动赋值）
+	Id       string       `json:"id"`
+	Price    float64      `json:"price"`
+	Time     int64        `json:"time"`
+	Customer CustomerInfo `json:"customer"`
+	Merchant MerchantInfo `json:"merchant"`
+}
+
 // ResourceName 返回资源名称
 func (m *Model) ResourceName() string {
 	return modelName
