@@ -28,4 +28,8 @@ const (
 	AlipayMiniApp
 	// MeiTuanMiniApp 美团小程序
 	MeiTuanMiniApp
+	// PosClient 点餐系统
+	PosClient
+	// WebClient 网页系统
+	WebClient
 )
