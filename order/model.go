@@ -47,6 +47,8 @@ type Model struct {
 	Pay pay.PayInfo `json:"pay" bson:"pay"`
 	// 价格信息
 	Price PriceInfo `json:"price" bson:"price"`
+	// 订单变更时间
+	Workflow []WorkflowInfo `json:"workflow" bson:"workflow"`
 }
 
 // IdentityInfo 标识信息
@@ -153,6 +155,14 @@ type PendingOrder struct {
 	Time     int64        `json:"time"`
 	Customer CustomerInfo `json:"customer"`
 	Merchant MerchantInfo `json:"merchant"`
+}
+
+// WorkflowInfo 订单操作记录
+type WorkflowInfo struct {
+	// Label 标签
+	Label string `json:"label" bson:"label"`
+	// Description 描述
+	Description string `json:"description" bson:"description"`
 }
 
 // ResourceName 返回资源名称
