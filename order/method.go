@@ -16,15 +16,15 @@ func (m *Model) GetByOrderID(id string) ([]*Model, error) {
 	// 获取数据列表
 	cursor, err := coll.Find(m.Context.Context, filter)
 	if errors.Is(err, mongo.ErrNoDocuments) {
-		log.Log().WithField("id", id).Error(err)
+		log.Log(m.Context.Context).WithField("id", id).Error(err)
 		return nil, err
 	}
 	if err != nil {
-		log.Log().WithField("id", id).Error(err)
+		log.Log(m.Context.Context).WithField("id", id).Error(err)
 		return nil, err
 	}
 	if err = cursor.All(m.Context.Context, &results); err != nil {
-		log.Log().WithField("id", id).Error(err)
+		log.Log(m.Context.Context).WithField("id", id).Error(err)
 		return nil, err
 	}
 	return results, nil
