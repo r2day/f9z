@@ -60,7 +60,7 @@ type Model struct {
 	IsUseProperty bool   `json:"is_use_property" bson:"is_use_property"`
 	CategoryID    string `json:"category_id" bson:"category_id"`
 	// 属性列表
-	Property []string `json:"property" bson:"property"`
+	Properties []string `json:"properties" bson:"properties"`
 
 	// 统计数据 & 限制
 	Sales     int `json:"sales"`
