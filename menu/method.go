@@ -11,8 +11,9 @@ import (
 // GetProducts 获取该菜谱下的所有商品
 func (m *Model) GetProducts() ([]*product.Model, error) {
 
+	productModel := product.Model{}
 	results := make([]*product.Model, 0)
-	coll := m.Context.Handler.Collection(m.Context.Collection)
+	coll := m.Context.Handler.Collection(productModel.Name)
 	filter := bson.M{"_id": bson.M{"$in": m.Products}}
 
 	// 获取数据列表
