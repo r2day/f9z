@@ -13,7 +13,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 
 	productModel := product.Model{}
 	results := make([]*product.Model, 0)
-	coll := m.Context.Handler.Collection(productModel.Name)
+	coll := m.Context.Handler.Collection(productModel.CollectionName())
 	filter := bson.M{"_id": bson.M{"$in": m.Products}}
 
 	// 获取数据列表
