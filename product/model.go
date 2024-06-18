@@ -2,6 +2,7 @@ package product
 
 import (
 	"github.com/open4go/model"
+	"github.com/r2day/f9z/property"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
@@ -61,7 +62,8 @@ type Model struct {
 	CategoryID    string `json:"category_id" bson:"category_id"`
 	// 属性列表
 	Properties []string `json:"properties" bson:"properties"`
-
+	// 属性列表（仅用于展示，读取property 表后渲染到这里）
+	Property []property.Model `json:"property" bson:"-"`
 	// 统计数据 & 限制
 	Sales     int `json:"sales"`
 	Stock     int `json:"stock"`
@@ -81,23 +83,6 @@ type SpecsInfo struct {
 	} `json:"values"`
 	Name string `json:"name"`
 	Id   int    `json:"id"`
-}
-
-type PropertyInfo struct {
-	IsOpenCheckbox bool              `json:"is_open_checkbox"`
-	Id             int               `json:"id"`
-	Price          int               `json:"price"`
-	Values         []PropertySetting `json:"values"`
-	Name           string            `json:"name"`
-	Desc           *string           `json:"desc,omitempty"`
-}
-
-type PropertySetting struct {
-	IsDefault int     `json:"is_default,omitempty"`
-	Id        int     `json:"id"`
-	Code      string  `json:"code"`
-	Value     string  `json:"value"`
-	Price     float64 `json:"price"`
 }
 
 type EntityInfo struct {
