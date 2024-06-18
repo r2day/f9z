@@ -63,7 +63,7 @@ type Model struct {
 	// 属性列表
 	Properties []primitive.ObjectID `json:"properties" bson:"properties"`
 	// 属性列表（仅用于展示，读取property 表后渲染到这里）
-	Property []property.Model `json:"property" bson:"-"`
+	Property []*property.Model `json:"property" bson:"-"`
 	// 统计数据 & 限制
 	Sales     int `json:"sales"`
 	Stock     int `json:"stock"`
