@@ -4,7 +4,7 @@ import (
 	"github.com/open4go/model"
 	"github.com/open4go/req5rsp/cst"
 	"github.com/r2day/f9z/pay"
-	"github.com/r2day/f9z/product"
+	"github.com/r2day/f9z/property"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -139,7 +139,9 @@ type Buckets struct {
 	// 单位
 	Unit string `json:"unit"  bson:"unit"`
 	// 属性列表
-	Property []product.PropertyInfo `json:"property"  bson:"property"`
+	Property []property.Model `json:"property"  bson:"property"`
+	// 以下的id可以快速的通过查找property表里的价格这个id对应的价格进行统计
+	PropsID []string `json:"props"  bson:"props"`
 	// 单品属性简述
 	PropsText string `json:"props_text"  bson:"props_text"`
 	// 图片
