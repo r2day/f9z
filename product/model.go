@@ -61,7 +61,7 @@ type Model struct {
 	IsUseProperty bool   `json:"is_use_property" bson:"is_use_property"`
 	CategoryID    string `json:"category_id" bson:"category_id"`
 	// 属性列表
-	Properties []string `json:"properties" bson:"properties"`
+	Properties []primitive.ObjectID `json:"properties" bson:"properties"`
 	// 属性列表（仅用于展示，读取property 表后渲染到这里）
 	Property []property.Model `json:"property" bson:"-"`
 	// 统计数据 & 限制
