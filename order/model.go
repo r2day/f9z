@@ -146,6 +146,8 @@ type Buckets struct {
 	PropsText string `json:"props_text"  bson:"props_text"`
 	// 图片
 	Image string `json:"image"  bson:"image"`
+	// 属性参数
+	PropsItem PropsItemInfo `json:"props_item"  bson:"-"`
 }
 
 // PendingOrder 数据展示
@@ -165,6 +167,14 @@ type WorkflowInfo struct {
 	Label string `json:"label" bson:"label"`
 	// Description 描述
 	Description string `json:"description" bson:"description"`
+}
+
+type PropsItemInfo struct {
+	IsDefault int    `json:"is_default"`
+	Id        int    `json:"id"`
+	Code      string `json:"code"`
+	Value     string `json:"value"`
+	Price     int    `json:"price"`
 }
 
 // ResourceName 返回资源名称
