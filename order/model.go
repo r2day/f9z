@@ -147,7 +147,7 @@ type Buckets struct {
 	// 图片
 	Image string `json:"image"  bson:"image"`
 	// 属性参数
-	PropsItem PropsItemInfo `json:"props_item"  bson:"-"`
+	PropsItem []PropsItemInfo `json:"props_item"  bson:"-"`
 }
 
 // PendingOrder 数据展示
