@@ -141,7 +141,7 @@ type Buckets struct {
 	// 属性列表
 	Property []property.Model `json:"property"  bson:"property"`
 	// 以下的id可以快速的通过查找property表里的价格这个id对应的价格进行统计
-	PropsID []string `json:"props"  bson:"props"`
+	PropsID []int `json:"props"  bson:"props"`
 	// 单品属性简述
 	PropsText string `json:"props_text"  bson:"props_text"`
 	// 图片
