@@ -92,6 +92,8 @@ type StatusTimePoint struct {
 	ReviewAt int64 `json:"review_at" bson:"review_at"`
 	// 	CompletedAt 完成时间
 	CompletedAt int64 `json:"completed_at" bson:"completed_at"`
+	// 	ClosedAt 关闭订单时间
+	ClosedAt int64 `json:"closed_at" bson:"closed_at"`
 }
 
 // CustomerInfo 客户信息
