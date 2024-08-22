@@ -30,6 +30,8 @@ type Model struct {
 	Identity IdentityInfo `json:"identity" bson:"identity"`
 	// 登陆审计信息
 	Login LoginInfo `json:"login" bson:"login"`
+	// 内部员工权限设置
+	Permission PermissionInfo `json:"permission" bson:"permission"`
 }
 
 // IdentityInfo 标识信息
@@ -72,6 +74,17 @@ type LoginInfo struct {
 	LoginIp string `json:"login_ip" bson:"login_ip"`
 	// 上次登陆IP
 	LastLoginIp string `json:"last_login_ip" bson:"last_login_ip"`
+}
+
+// PermissionInfo 特权信息
+// 例如：设置会员是否属于内部员工等
+type PermissionInfo struct {
+	// 权限等级
+	Access uint64 `json:"access" bson:"access"`
+	// 登陆次数1,2,4,8, 不存储（在创建的时候用于参数接收与渲染展示
+	AccessBits []uint64 `json:"access_bits" bson:"-"`
+	// 上次登陆时间
+	IsInternalStaff bool `json:"is_internal_staff" bson:"is_internal_staff"`
 }
 
 // ResourceName 返回资源名称
