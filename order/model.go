@@ -169,6 +169,10 @@ type WorkflowInfo struct {
 	Label string `json:"label" bson:"label"`
 	// Description 描述
 	Description string `json:"description" bson:"description"`
+	// Operator 操作人
+	Operator string `json:"operator" bson:"operator"`
+	// OperatorID 操作人ID
+	OperatorID string `json:"operator_id" bson:"operator_id"`
 }
 
 type PropsItemInfo struct {
