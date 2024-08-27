@@ -6,6 +6,18 @@ type PickUpType int
 // SourceType 订单来源
 type SourceType int
 
+// RefundType 订单来源
+type RefundType int
+
+// RefundReasonType 退款原因
+type RefundReasonType int
+
+// RefundStatus 退款申请单处理状态
+type RefundStatus int
+
+// RefundAudit 退款审计
+type RefundAudit int
+
 const (
 	// HelpYourSelf 自提
 	HelpYourSelf PickUpType = iota
@@ -33,3 +45,36 @@ const (
 	// WebClient 网页系统
 	WebClient
 )
+
+const (
+	// InvalidApply 无效申请
+	InvalidApply RefundType = iota
+	// MerchantApply 商户申请
+	MerchantApply
+	// CustomerApply 客户申请
+	CustomerApply
+)
+
+const (
+	// InvalidRefundReasonApply 无效申请
+	InvalidRefundReasonApply RefundReasonType = iota
+	// RefundReasonCancelOrder 取消订单
+	RefundReasonCancelOrder
+	// RefundReasonRefundOrder 退定商品
+	RefundReasonRefundOrder
+)
+
+const (
+	// RefundApplying 申请退款中
+	RefundApplying RefundStatus = iota
+	// RefundProcessed 退款已处理（操作人进行处理）
+	RefundProcessed
+	// RefundDone 退款完成 （回调通知收到退款回调）
+	RefundDone
+)
+
+//const (
+//	// RefundAuditA 申请退款中
+//	RefundAuditA RefundAudit = iota
+//	// RefundProcessed 退款已处理（操作人进行处理）
+//)

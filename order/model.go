@@ -49,6 +49,8 @@ type Model struct {
 	Price PriceInfo `json:"price" bson:"price"`
 	// 订单变更时间
 	Workflow []WorkflowInfo `json:"workflow" bson:"workflow"`
+	// Refund 退款申请
+	Refund []*RefundApply `json:"refund" bson:"refund"`
 }
 
 // IdentityInfo 标识信息
@@ -181,6 +183,48 @@ type PropsItemInfo struct {
 	Code      string `json:"code"`
 	Value     string `json:"value"`
 	Price     int    `json:"price"`
+}
+
+// RefundApply 退款申请记录
+type RefundApply struct {
+	ApplyId string           `json:"id"`     // 申请单id
+	Type    RefundReasonType `json:"type"`   // 申请单类型：1取消订单 2退款
+	Status  RefundStatus     `json:"status"` // 申请状态:  0:待处理 1:已审批 2:已完成
+	Audit   string           `json:"audit"`  // 审批类型:  1:同意 2:退款
+	// Amount 一般情况下取消订单可以直接全额退款
+	Amount int64 `json:"amount"` // 退款金额
+	// OperatorID 操作人
+	Operator string `json:"operator"` // 处理人
+	// OperatorID 操作人ID
+	OperatorID  string     `json:"operator_id" bson:"operator_id"`
+	Applier     string     `json:"applier"`                          // 申请发起人id, 用户或商户
+	ApplierType RefundType `json:"applier_type" bson:"applier_type"` // 发起人的用户类型 1用户 2商户
+}
+
+// PendingApply 返回待处理申请
+func (m *Model) PendingApply() *RefundApply {
+	for _, apply := range m.Refund {
+		if apply.Status == RefundApplying { // Status 为 0 表示待处理
+			return apply
+		}
+	}
+	return nil // 如果没有待处理申请，返回 nil
+}
+
+// UpdateApply 返回待处理申请
+// newList := m.UpdateApply(target)
+// m.Refund = newList
+func (m *Model) UpdateApply(target *RefundApply) []*RefundApply {
+	newList := make([]*RefundApply, 0)
+	for _, apply := range m.Refund {
+		if apply.ApplyId == target.ApplyId { // Status 为 0 表示待处理
+			newList = append(newList, target)
+		} else {
+			// 保持原来的列表不变
+			newList = append(newList, apply)
+		}
+	}
+	return newList // 如果没有待处理申请，返回 nil
 }
 
 // ResourceName 返回资源名称
