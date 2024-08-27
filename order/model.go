@@ -191,6 +191,7 @@ type RefundApply struct {
 	Type    RefundReasonType `json:"type"`   // 申请单类型：1取消订单 2退款
 	Status  RefundStatus     `json:"status"` // 申请状态:  0:待处理 1:已审批 2:已完成
 	Audit   string           `json:"audit"`  // 审批类型:  1:同意 2:退款
+	Reason  string           `json:"reason"` // 原因
 	// Amount 一般情况下取消订单可以直接全额退款
 	Amount int64 `json:"amount"` // 退款金额
 	// OperatorID 操作人
