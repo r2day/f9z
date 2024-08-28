@@ -200,6 +200,8 @@ type RefundApply struct {
 	OperatorID  string     `json:"operator_id" bson:"operator_id"`
 	Applier     string     `json:"applier"`                          // 申请发起人id, 用户或商户
 	ApplierType RefundType `json:"applier_type" bson:"applier_type"` // 发起人的用户类型 1用户 2商户
+	// 	CreatedAt 创建时间
+	CreatedAt int64 `json:"created_at" bson:"created_at"`
 }
 
 // PendingApply 返回待处理申请
