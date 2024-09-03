@@ -34,6 +34,8 @@ type Model struct {
 	Assets AssetsInfo `json:"assets" bson:"assets"`
 	// 当前邀请人情况
 	Invitee InviterInfo `json:"invitee" bson:"invitee"`
+	// 权限管理
+	Permission PermissionInfo `json:"permission" bson:"permission"`
 }
 
 // IdentityInfo 标识信息
