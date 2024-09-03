@@ -30,8 +30,10 @@ type Model struct {
 	Identity IdentityInfo `json:"identity" bson:"identity"`
 	// 登陆审计信息
 	Login LoginInfo `json:"login" bson:"login"`
-	// 内部员工权限设置
-	Permission PermissionInfo `json:"permission" bson:"permission"`
+	// 个人资产
+	Assets AssetsInfo `json:"assets" bson:"assets"`
+	// 当前邀请人情况
+	Invitee InviterInfo `json:"invitee" bson:"invitee"`
 }
 
 // IdentityInfo 标识信息
@@ -85,6 +87,32 @@ type PermissionInfo struct {
 	AccessBits []uint64 `json:"access_bits" bson:"-"`
 	// 上次登陆时间
 	IsInternalStaff bool `json:"is_internal_staff" bson:"is_internal_staff"`
+}
+
+// AssetsInfo 资产
+type AssetsInfo struct {
+	// 点数
+	PointNum int `json:"point_num" bson:"point_num"`
+	// 积分
+	CouponNum int `json:"coupon_num" bson:"coupon_num"`
+	// 余额
+	Balance float64 `json:"balance" bson:"balance"`
+	// 礼物
+	GiftBalance int `json:"gift_balance" bson:"gift_balance"`
+}
+
+// InviterInfo 邀请人
+type InviterInfo struct {
+	// 当前阶段，当前已经完成度 （完成三次就可以得到一次奖励
+	CurrentValue int `json:"current_value" bson:"current_value"`
+	// 当前阶段，还需要完成值
+	NeedValue int `json:"need_value" bson:"need_value"`
+	// 邀请人数要求完成次数/每轮
+	Turn int `json:"turn" bson:"turn"`
+	// 总共完成
+	Total int `json:"total" bson:"total"`
+	// 被邀请人id列表
+	Invitee []string `json:"invitee" bson:"invitee"`
 }
 
 // ResourceName 返回资源名称
