@@ -115,6 +115,8 @@ type InviterInfo struct {
 	Total int `json:"total" bson:"total"`
 	// 被邀请人id列表
 	Invitee []string `json:"invitee" bson:"invitee"`
+	// 邀请人id
+	Inviter string `json:"inviter" bson:"inviter"`
 }
 
 // ResourceName 返回资源名称
