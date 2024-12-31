@@ -59,7 +59,9 @@ type Model struct {
 	Content       string `json:"content"`
 	UseProperty   int    `json:"use_property" bson:"use_property"`
 	IsUseProperty bool   `json:"is_use_property" bson:"is_use_property"`
-	CategoryID    string `json:"category_id" bson:"category_id"`
+
+	// 类型用于区分商品的分类
+	CategoryID string `json:"category_id" bson:"category_id"`
 	// 属性列表
 	Properties []primitive.ObjectID `json:"properties" bson:"properties"`
 	// 属性列表（仅用于展示，读取property 表后渲染到这里）
@@ -73,6 +75,8 @@ type Model struct {
 	Images   string   `json:"images"`
 	CoverImg string   `json:"cover_img" bson:"cover_img"`
 	ImageArr []string `json:"imageArr"`
+	// 所属菜谱(一个菜品可以属于多个菜谱中，例如：粉也可以属于套餐里的）
+	BelongMenu []string `json:"belong_menu" bson:"belong_menu"`
 }
 
 type SpecsInfo struct {
