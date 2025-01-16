@@ -31,6 +31,8 @@ type Model struct {
 	Values  []PropertySetting  `json:"values"  bson:"values"`
 	Name    string             `json:"name"  bson:"name"`
 	Desc    string             `json:"desc"  bson:"desc"`
+	// multiple_selection
+	MultipleSelection bool `json:"multiple_selection"  bson:"multiple_selection"`
 }
 
 // PropertySetting 属性设置
