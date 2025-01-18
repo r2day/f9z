@@ -137,7 +137,7 @@ type Buckets struct {
 	// 数量
 	Number int `json:"number"  bson:"number"`
 	// 单价
-	Price int `json:"price"  bson:"price"`
+	Price float64 `json:"price"  bson:"price"`
 	// 原始价格
 	OriginAmount string `json:"origin_amount"  bson:"origin_amount"`
 	// 单位
