@@ -80,6 +80,8 @@ type PriceInfo struct {
 	RetailPrice string `json:"retail_price" bson:"retail_price"`
 	// 支付金额(单位：分）
 	PayPrice int64 `json:"pay_price" bson:"pay_price"`
+	// 待支付金额(单位：元）这个金额是可能包含小数点
+	RealPrice float64 `json:"real_price" bson:"real_price"`
 }
 
 // StatusTimePoint 订单状态关键时间点
