@@ -42,7 +42,8 @@ type Model struct {
 	// 更新方式
 	UpdateType int `json:"update_type" bson:"update_type"`
 	// 套餐配置
-	Combo []ComboInfo `json:"combo" bson:"combo"`
+	Combo       []ComboInfo `json:"combo" bson:"combo"`
+	IsComboMode bool        `json:"isComboMode" bson:"isComboMode"`
 }
 
 // ComboInfo 套餐信息
