@@ -41,6 +41,15 @@ type Model struct {
 	Stores []string `json:"stores" bson:"stores"`
 	// 更新方式
 	UpdateType int `json:"update_type" bson:"update_type"`
+	// 套餐配置
+	Combo []ComboInfo `json:"combo" bson:"combo"`
+}
+
+// ComboInfo 套餐信息
+type ComboInfo struct {
+	Price    int      `json:"price"`
+	Quantity string   `json:"quantity"`
+	Products []string `json:"products"`
 }
 
 // ResourceName 返回资源名称
