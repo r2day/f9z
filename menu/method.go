@@ -13,7 +13,6 @@ import (
 func (m *Model) GetProducts() ([]*product.Model, error) {
 
 	productModel := product.Model{}
-	results := make([]*product.Model, 0)
 	allResults := make([]*product.Model, 0)
 	coll := m.Context.Handler.Collection(productModel.CollectionName())
 	filter := bson.M{"_id": bson.M{"$in": m.Products}}
@@ -39,6 +38,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 				return nil, err
 			}
 
+			var results []*product.Model
 			if err = cursor.All(m.Context.Context, &results); err != nil {
 				log.Log(m.Context.Context).WithField("m", m).Error(err)
 				return nil, err
@@ -74,6 +74,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 		return nil, err
 	}
 
+	var results []*product.Model
 	if err = cursor.All(m.Context.Context, &results); err != nil {
 		log.Log(m.Context.Context).WithField("m", m).Error(err)
 		return nil, err
