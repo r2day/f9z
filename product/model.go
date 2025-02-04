@@ -81,6 +81,8 @@ type Model struct {
 	CombID string `json:"combID" bson:"combID"`
 	// 最多限购
 	MaxPurchaseAllowed int `json:"maxPurchaseAllowed" bson:"maxPurchaseAllowed"`
+	// 套餐选项序号
+	CombIndex int `json:"combIndex"`
 }
 
 type SpecsInfo struct {

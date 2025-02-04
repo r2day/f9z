@@ -19,7 +19,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 	filter := bson.M{"_id": bson.M{"$in": m.Products}}
 	if m.IsComboMode {
 		// 如果是套餐模式则通过获取套餐列表
-		for _, i := range m.Combo {
+		for index, i := range m.Combo {
 			productIds, err := f9z.ConvertToObjectID(i.Products)
 			if err != nil {
 				log.Log(m.Context.Context).WithField("i.Products", i.Products).Error(err)
@@ -46,9 +46,12 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 			// 将该套餐的产品进行标识（但是不影响产品本身，只是在该类套餐中标识）
 			for _, p := range results {
 				p.CombID = m.ID.Hex()
+				// 套餐有多个组合，每个组合设置一组id
+				p.CombIndex = index
 				// 该类产品的
 				p.MaxPurchaseAllowed = i.Quantity
-				//
+				// TODO 套餐价格(一般会跟原商品价格存在差异，因此这里会重新设定价格，但是这个价格可能会在下单时，
+				// 根据商品id查询到的价格结果不一致，所以需要注意优化
 				p.Price = i.Price
 				// 将所有产品拼接
 				allResults = append(allResults, p)
