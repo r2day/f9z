@@ -48,7 +48,7 @@ type Model struct {
 
 // ComboInfo 套餐信息
 type ComboInfo struct {
-	Price    int      `json:"price"`
+	Price    float64  `json:"price"`
 	Quantity int      `json:"quantity"`
 	Products []string `json:"products"`
 }

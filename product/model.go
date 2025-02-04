@@ -77,6 +77,10 @@ type Model struct {
 	ImageArr []string `json:"imageArr"`
 	// 所属菜谱(一个菜品可以属于多个菜谱中，例如：粉也可以属于套餐里的）
 	BelongMenu []string `json:"belong_menu" bson:"belong_menu"`
+	// 套餐id
+	CombID string `json:"combID" bson:"combID"`
+	// 最多限购
+	MaxPurchaseAllowed int `json:"maxPurchaseAllowed" bson:"maxPurchaseAllowed"`
 }
 
 type SpecsInfo struct {
