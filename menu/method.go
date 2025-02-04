@@ -26,7 +26,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 				// 如果错误直接跳过
 				continue
 			}
-			filter := bson.M{"_id": bson.M{"$in": productIds}}
+			filter = bson.M{"_id": bson.M{"$in": productIds}}
 			// 获取数据列表
 			cursor, err := coll.Find(m.Context.Context, filter)
 			if errors.Is(err, mongo.ErrNoDocuments) {
@@ -54,7 +54,7 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 				// 根据商品id查询到的价格结果不一致，所以需要注意优化
 				p.Price = i.Price
 				// 将所有产品拼接
-				allResults = append(allResults, p)
+				allResults = append(allResults, p) // 直接使用 allResults
 			}
 		}
 		// 当所有内容拼接完毕后返回
