@@ -14,6 +14,8 @@ const (
 	MeiTuanUser
 	// PhoneUser 手机号注册用户
 	PhoneUser
+	// PosTerminal 终端支付系统
+	PosTerminal
 )
 
 // UserGender 用户性别
