@@ -209,7 +209,7 @@ type RefundApply struct {
 // PendingApply 返回待处理申请
 func (m *Model) PendingApply() *RefundApply {
 	for _, apply := range m.Refund {
-		if apply.Status == RefundApplying { // Status 为 0 表示待处理
+		if apply.Status == RefundProcessed { // Status 为 1 表示已经同意，可以进行申请退款
 			return apply
 		}
 	}
