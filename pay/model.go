@@ -64,6 +64,8 @@ type PrepareTrade struct {
 	Timestamp string `json:"timestamp"`
 	// Sign 签名
 	Sign string `json:"sign"`
+	// PrepayID 待支持凭证
+	PrepayID string `json:"prepay_id"`
 }
 
 // ResourceName 返回资源名称
