@@ -10,7 +10,11 @@ import (
 
 // GetProperty 获取属性配置
 func (m *Model) GetProperty() ([]*property.Model, error) {
-
+	// 判断 m.Properties 是否为空
+	if len(m.Properties) == 0 {
+		return nil, nil
+	}
+	
 	productModel := property.Model{}
 	results := make([]*property.Model, 0)
 	coll := m.Context.Handler.Collection(productModel.CollectionName())
