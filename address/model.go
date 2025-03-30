@@ -44,8 +44,10 @@ type Model struct {
 	DoorNum string `json:"door_num" bson:"door_num"`
 	// 账号
 	AccountID string `json:"account_id" bson:"account_id"`
-	//
+	// Inner 内部地址
 	Inner bool `json:"inner"  bson:"inner"`
+	// IsDefault 是否默认地址
+	IsDefault bool `json:"is_default"  bson:"is_default"`
 }
 
 // ResourceName 返回资源名称
