@@ -48,6 +48,8 @@ type Model struct {
 	Inner bool `json:"inner"  bson:"inner"`
 	// IsDefault 是否默认地址
 	IsDefault bool `json:"is_default"  bson:"is_default"`
+	// 标签 (公司/家/学校）
+	Tag string `json:"tag" bson:"tag"`
 }
 
 // ResourceName 返回资源名称
