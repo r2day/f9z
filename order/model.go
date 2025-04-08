@@ -51,6 +51,8 @@ type Model struct {
 	Workflow []WorkflowInfo `json:"workflow" bson:"workflow"`
 	// Refund 退款申请
 	Refund []*RefundApply `json:"refund" bson:"refund"`
+	// 订单收货地址
+	Addr MyAddr `json:"addr" bson:"Addr"`
 }
 
 // IdentityInfo 标识信息
@@ -204,6 +206,25 @@ type RefundApply struct {
 	ApplierType RefundType `json:"applier_type" bson:"applier_type"` // 发起人的用户类型 1用户 2商户
 	// 	CreatedAt 创建时间
 	CreatedAt int64 `json:"created_at" bson:"created_at"`
+}
+
+type MyAddr struct {
+	// 收货人
+	AcceptName string `json:"accept_name" bson:"accept_name"`
+	// 手机号
+	Mobile string `json:"mobile"  bson:"mobile"`
+	// 性别
+	Sex int `json:"sex" bson:"sex"`
+	// 地址
+	Address string `json:"address" bson:"address"`
+	// 地址
+	AddressShotName string `json:"addressShotName" bson:"address_shot_name"`
+	// 经纬度
+	Latitude float64 `json:"latitude" bson:"latitude"`
+	// 经纬度
+	Longitude float64 `json:"longitude" bson:"longitude"`
+	// 门牌号
+	DoorNum string `json:"door_num" bson:"door_num"`
 }
 
 // PendingApply 返回待处理申请
