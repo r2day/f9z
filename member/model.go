@@ -62,6 +62,10 @@ type IdentityInfo struct {
 	RegisterArea string `json:"register_area" bson:"register_area"`
 	// Avatar 头像
 	Avatar string `json:"avatar" bson:"avatar"`
+	// Level 等级
+	Level string `json:"level" bson:"level"`
+	// Badge 标签
+	Badge string `json:"badge" bson:"badge"`
 }
 
 // LoginInfo 登陆信息
@@ -95,12 +99,14 @@ type PermissionInfo struct {
 type AssetsInfo struct {
 	// 点数
 	PointNum int `json:"point_num" bson:"point_num"`
-	// 积分
+	// 优惠券
 	CouponNum int `json:"coupon_num" bson:"coupon_num"`
 	// 余额
 	Balance float64 `json:"balance" bson:"balance"`
 	// 礼物
 	GiftBalance int `json:"gift_balance" bson:"gift_balance"`
+	// 积分
+	Integrals int `json:"integrals" bson:"integrals"`
 }
 
 // InviterInfo 邀请人
