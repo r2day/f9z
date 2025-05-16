@@ -69,6 +69,10 @@ type IdentityInfo struct {
 	TableNo string `json:"table_no" bson:"table_no"`
 	// 当前排队号
 	CurrentPos int64 `json:"current_pos" bson:"-"`
+	// TakeTime 取餐时间
+	TakeTime string `json:"take_time" bson:"take_time"`
+	// TakeTimeName 取餐时间名称
+	TakeTimeName string `json:"take_time_name" bson:"take_time_name"`
 }
 
 type PriceInfo struct {
@@ -100,6 +104,8 @@ type StatusTimePoint struct {
 	CompletedAt int64 `json:"completed_at" bson:"completed_at"`
 	// 	ClosedAt 关闭订单时间
 	ClosedAt int64 `json:"closed_at" bson:"closed_at"`
+	// 	TakeTime 取餐时间
+	TakeTime int64 `json:"take_time" bson:"take_time"`
 }
 
 // CustomerInfo 客户信息
