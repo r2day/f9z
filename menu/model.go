@@ -44,6 +44,7 @@ type Model struct {
 	// 套餐配置
 	Combo       []ComboInfo `json:"combo" bson:"combo"`
 	IsComboMode bool        `json:"isComboMode" bson:"isComboMode"`
+	Price       float64     `json:"price"`
 }
 
 // ComboInfo 套餐信息
