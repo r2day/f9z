@@ -42,6 +42,8 @@ type Model struct {
 	// 更新方式
 	UpdateType int `json:"update_type" bson:"update_type"`
 	// 套餐配置
+	// 例如：饮料（可选 芒果，西瓜）
+	//  主食（粉，面，粥）
 	Combo       []ComboInfo `json:"combo" bson:"combo"`
 	IsComboMode bool        `json:"isComboMode" bson:"isComboMode"`
 	Price       float64     `json:"price"`
@@ -49,8 +51,15 @@ type Model struct {
 
 // ComboInfo 套餐信息
 type ComboInfo struct {
-	Price    float64  `json:"price"`
-	Quantity int      `json:"quantity"`
+	// 子选项名称
+	CombName string `json:"combName" bson:"combName"`
+	// 该选项的定价
+	Price float64 `json:"price"`
+	// 商品数量
+	Quantity int `json:"quantity"`
+	// 要求选择的数量
+	Requires int `json:"requires"`
+	// 可选的项目产品id
 	Products []string `json:"products"`
 }
 
