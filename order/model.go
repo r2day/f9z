@@ -53,6 +53,8 @@ type Model struct {
 	Refund []*RefundApply `json:"refund" bson:"refund"`
 	// 订单收货地址
 	Addr MyAddr `json:"addr" bson:"Addr"`
+	// 当前退款信息
+	RefundSummary RefundInfo `json:"refund_summary" bson:"refund_summary"`
 }
 
 // IdentityInfo 标识信息
@@ -162,6 +164,8 @@ type Buckets struct {
 	Image string `json:"image"  bson:"image"`
 	// 属性参数
 	PropsItem []PropsItemInfo `json:"props_item"  bson:"-"`
+	// 状态 0 默认；1 退货；暂时用数字标识
+	Status int `json:"status"  bson:"status"`
 }
 
 // PendingOrder 数据展示
@@ -231,6 +235,14 @@ type MyAddr struct {
 	Longitude float64 `json:"longitude" bson:"longitude"`
 	// 门牌号
 	DoorNum string `json:"door_num" bson:"door_num"`
+}
+
+// RefundInfo 退款信息
+type RefundInfo struct {
+	// 当前退款总额(单位元）
+	TotalAmount string `json:"total_amount" bson:"total_amount"`
+	// 当前退款总次数
+	TotalTimes string `json:"total_times" bson:"total_times"`
 }
 
 // PendingApply 返回待处理申请
