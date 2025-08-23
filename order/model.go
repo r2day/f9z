@@ -240,9 +240,9 @@ type MyAddr struct {
 // RefundInfo 退款信息
 type RefundInfo struct {
 	// 当前退款总额(单位元）
-	TotalAmount string `json:"total_amount" bson:"total_amount"`
+	TotalAmount int64 `json:"total_amount" bson:"total_amount"`
 	// 当前退款总次数
-	TotalTimes string `json:"total_times" bson:"total_times"`
+	TotalTimes int64 `json:"total_times" bson:"total_times"`
 }
 
 // PendingApply 返回待处理申请
