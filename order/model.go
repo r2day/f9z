@@ -181,7 +181,7 @@ type PendingOrder struct {
 
 // WorkflowInfo 订单操作记录
 type WorkflowInfo struct {
-	// Label 标签
+	// Label 标签（标题）
 	Label string `json:"label" bson:"label"`
 	// Description 描述
 	Description string `json:"description" bson:"description"`
@@ -189,6 +189,8 @@ type WorkflowInfo struct {
 	Operator string `json:"operator" bson:"operator"`
 	// OperatorID 操作人ID
 	OperatorID string `json:"operator_id" bson:"operator_id"`
+	// Datetime 时间
+	Datetime string `json:"datetime" bson:"datetime"`
 }
 
 type PropsItemInfo struct {
