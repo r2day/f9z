@@ -164,7 +164,7 @@ type Buckets struct {
 	Image string `json:"image"  bson:"image"`
 	// 属性参数
 	PropsItem []PropsItemInfo `json:"props_item"  bson:"-"`
-	// 状态 0 默认；1 退货；暂时用数字标识
+	// 状态 0 默认；1 退货；暂时用数字标识; 2: 已出餐
 	Status int `json:"status"  bson:"status"`
 }
 

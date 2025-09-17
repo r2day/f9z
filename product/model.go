@@ -83,6 +83,8 @@ type Model struct {
 	MaxPurchaseAllowed int `json:"maxPurchaseAllowed" bson:"maxPurchaseAllowed"`
 	// 套餐选项序号
 	CombIndex int `json:"combIndex"`
+	// 出品部
+	Producer string `json:"producer" bson:"producer"`
 }
 
 type SpecsInfo struct {
