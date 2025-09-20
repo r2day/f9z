@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/open4go/log v0.0.17
-	github.com/open4go/model v0.0.22
+	github.com/open4go/model v0.0.23
 	github.com/open4go/req5rsp v0.1.15
 	go.mongodb.org/mongo-driver v1.17.3
 )
