@@ -36,6 +36,8 @@ type Model struct {
 	Invitee InviterInfo `json:"invitee" bson:"invitee"`
 	// 权限管理
 	Permission PermissionInfo `json:"permission" bson:"permission"`
+	// 收藏门店列表
+	FavoriteStore []string `json:"favoriteStore" bson:"favoriteStore"`
 }
 
 // IdentityInfo 标识信息
