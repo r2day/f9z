@@ -20,8 +20,9 @@ type Model struct {
 
 	// 关联信息
 	TenantID   string `json:"tenant_id" bson:"tenant_id"`
-	OrderID    string `json:"order_id" bson:"order_id"`
+	StoreID    string `json:"store_id" bson:"store_id"`
 	MemberID   string `json:"member_id" bson:"member_id"`
+	OrderID    string `json:"order_id" bson:"order_id"`
 	MerchantID string `json:"merchant_id" bson:"merchant_id"`
 
 	// 核心字段
