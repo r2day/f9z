@@ -19,9 +19,14 @@ type Model struct {
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 
 	// 关联信息
-	TenantID   string `json:"tenant_id" bson:"tenant_id"`
-	StoreID    string `json:"store_id" bson:"store_id"`
-	MemberID   string `json:"member_id" bson:"member_id"`
+	TenantID string `json:"tenant_id" bson:"tenant_id"`
+	StoreID  string `json:"store_id" bson:"store_id"`
+	// 三方会员id （例如：微信的openid )
+	MemberID string `json:"member_id" bson:"member_id"`
+	// 内部会员id (会员id 对应的mongodb id hex）
+	AccountID string `json:"account_id" bson:"account_id"`
+	// 内部会员用户id（AC0000000）
+	UserID     string `json:"user_id" bson:"user_id"`
 	OrderID    string `json:"order_id" bson:"order_id"`
 	MerchantID string `json:"merchant_id" bson:"merchant_id"`
 
