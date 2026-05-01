@@ -56,8 +56,14 @@ type IdentityInfo struct {
 	Gender UserGender `json:"gender" bson:"gender"`
 	// 微信登陆信息
 	WxLoginID string `json:"wx_login_id" bson:"wx_login_id"`
-	// 手机号
+	// 手机号（未加密的）
 	Phone string `json:"phone" bson:"phone"`
+	// 手机后四位
+	PhoneSuffix string `json:"phone_suffix" bson:"phone_suffix"`
+	// 手机号哈希
+	PhoneHash string `json:"phone_hash" bson:"phone_hash"`
+	// 手机号加密
+	PhoneSec string `json:"phone_sec" bson:"phone_sec"`
 	// 注册ip
 	RegisterIP string `json:"register_ip" bson:"register_ip"`
 	// 注册地区
