@@ -1,6 +1,10 @@
 package shift
 
-import "github.com/open4go/req5rsp/cst"
+import (
+	"github.com/open4go/model"
+	"github.com/open4go/req5rsp/cst"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 const (
 	// CollectionNamePrefix 数据库表前缀
@@ -22,14 +26,19 @@ type MenuItem struct {
 }
 
 type Order struct {
-	OrderID       string          `json:"order_id" bson:"order_id,omitempty"`
-	TableID       *string         `json:"table_id" bson:"table_id,omitempty"`
-	Items         []MenuItem      `json:"items" bson:"items,omitempty"`
-	Status        cst.OrderStatus `json:"status" bson:"status,omitempty"`
-	TotalAmount   float64         `json:"total_amount" bson:"total_amount,omitempty"`
-	PaidAmount    float64         `json:"paid_amount" bson:"paid_amount,omitempty"`
-	PaymentMethod string          `json:"payment_method" bson:"payment_method,omitempty"`
-	CreateTime    string          `json:"create_time" bson:"create_time,omitempty"`
+	// 模型继承
+	model.Model `json:"_" bson:"_"`
+	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
+	// 创建时（用户上传的数据为空，所以默认可以不传该值)
+	ID            primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	OrderID       string             `json:"order_id" bson:"order_id,omitempty"`
+	TableID       *string            `json:"table_id" bson:"table_id,omitempty"`
+	Items         []MenuItem         `json:"items" bson:"items,omitempty"`
+	Status        cst.OrderStatus    `json:"status" bson:"status,omitempty"`
+	TotalAmount   float64            `json:"total_amount" bson:"total_amount,omitempty"`
+	PaidAmount    float64            `json:"paid_amount" bson:"paid_amount,omitempty"`
+	PaymentMethod string             `json:"payment_method" bson:"payment_method,omitempty"`
+	CreateTime    string             `json:"create_time" bson:"create_time,omitempty"`
 }
 
 type Model struct {
