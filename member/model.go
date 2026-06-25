@@ -38,6 +38,8 @@ type Model struct {
 	Permission PermissionInfo `json:"permission" bson:"permission"`
 	// 收藏门店列表
 	FavoriteStore []string `json:"favoriteStore" bson:"favoriteStore"`
+	// ==================== 新增：操作日志 ====================
+	Logs []OperationLog `json:"logs" bson:"logs"`
 }
 
 // IdentityInfo 标识信息
@@ -72,8 +74,9 @@ type IdentityInfo struct {
 	Avatar string `json:"avatar" bson:"avatar"`
 	// Level 等级
 	Level string `json:"level" bson:"level"`
-	// Badge 标签
-	Badge string `json:"badge" bson:"badge"`
+	// 新增：层级ID（整型，推荐用于关联）
+	LevelID int    `json:"level_id" bson:"level_id"`
+	Badge   string `json:"badge" bson:"badge"`
 }
 
 // LoginInfo 登陆信息
@@ -131,6 +134,19 @@ type InviterInfo struct {
 	Invitee []string `json:"invitee" bson:"invitee"`
 	// 邀请人id
 	Inviter string `json:"inviter" bson:"inviter"`
+}
+
+// OperationLog 会员操作日志
+type OperationLog struct {
+	ID       primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Time     int64              `json:"time" bson:"time"`         // 操作时间
+	Operator string             `json:"operator" bson:"operator"` // 操作人（管理员ID或系统）
+	Action   string             `json:"action" bson:"action"`     // 操作类型：update_level, recharge, login, etc.
+	Target   string             `json:"target" bson:"target"`     // 操作目标（如 level、balance 等）
+	OldValue interface{}        `json:"old_value,omitempty" bson:"old_value,omitempty"`
+	NewValue interface{}        `json:"new_value,omitempty" bson:"new_value,omitempty"`
+	IP       string             `json:"ip,omitempty" bson:"ip,omitempty"`
+	Remark   string             `json:"remark,omitempty" bson:"remark,omitempty"` // 备注
 }
 
 // ResourceName 返回资源名称
