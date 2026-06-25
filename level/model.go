@@ -34,10 +34,9 @@ type Model struct {
 	IsActive  bool `json:"is_active" bson:"is_active"`   // 是否启用
 	IsDefault bool `json:"is_default" bson:"is_default"` // 是否为默认层级（新用户默认归属）
 
-	// ==================== 积分门槛 ====================
-	MinPoints int64 `json:"min_points" bson:"min_points"` // 最小积分要求
-	MaxPoints int64 `json:"max_points" bson:"max_points"` // 最大积分（0 或 null 表示无上限）
-	Unlimited bool  `json:"unlimited" bson:"unlimited"`   // 是否无上限
+	// ==================== 升级条件 ====================
+	// 推荐使用这个字段替代或补充原来的 Min/MaxPoints
+	Condition Condition `json:"condition" bson:"condition"`
 
 	// ==================== 核心权益 ====================
 	DiscountRate     float64 `json:"discount_rate" bson:"discount_rate"`         // 折扣率（0.95 = 95折）
@@ -53,6 +52,28 @@ type Model struct {
 	Description string `json:"description" bson:"description"` // 层级描述与权益说明（支持富文本）
 	UserCount   int    `json:"user_count" bson:"user_count"`   // 涉及到的用户，这个一般只会在返回的时候统计算出来
 }
+
+// Condition 会员升级条件（支持多种类型，未来扩展友好）
+type Condition struct {
+	Type      ConditionType `json:"type" bson:"type"`           // 条件类型：points, amount, orders, custom 等
+	MinValue  int64         `json:"min_value" bson:"min_value"` // 最小值
+	MaxValue  int64         `json:"max_value" bson:"max_value"` // 最大值（0 表示无上限）
+	Unlimited bool          `json:"unlimited" bson:"unlimited"` // 是否无上限
+
+	// 扩展字段（未来用）
+	// Unit      string `json:"unit,omitempty" bson:"unit,omitempty"` // 如 "元", "单", "天"
+	// Expression string `json:"expression,omitempty" bson:"expression,omitempty"` // 复杂表达式（可选）
+}
+
+// ConditionType 条件类型枚举
+type ConditionType string
+
+const (
+	ConditionPoints ConditionType = "points" // 积分
+	ConditionAmount ConditionType = "amount" // 消费金额
+	ConditionOrders ConditionType = "orders" // 订单数量
+	ConditionCustom ConditionType = "custom" // 自定义（预留）
+)
 
 // ResourceName 返回资源名称
 func (m *Model) ResourceName() string {
