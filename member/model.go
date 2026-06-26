@@ -39,7 +39,8 @@ type Model struct {
 	// 收藏门店列表
 	FavoriteStore []string `json:"favoriteStore" bson:"favoriteStore"`
 	// ==================== 新增：操作日志 ====================
-	Logs []OperationLog `json:"logs" bson:"logs"`
+	Logs       []OperationLog `json:"logs" bson:"logs"`
+	Statistics Statistics     `json:"statistics" bson:"statistics"` // 新增：统计信息
 }
 
 // IdentityInfo 标识信息
@@ -147,6 +148,29 @@ type OperationLog struct {
 	NewValue interface{}        `json:"new_value,omitempty" bson:"new_value,omitempty"`
 	IP       string             `json:"ip,omitempty" bson:"ip,omitempty"`
 	Remark   string             `json:"remark,omitempty" bson:"remark,omitempty"` // 备注
+}
+
+// Statistics ==================== 新增：统计信息 ====================
+type Statistics struct {
+	// 充值相关
+	RechargeCount  int     `json:"recharge_count" bson:"recharge_count"`     // 充值次数
+	TotalRecharge  float64 `json:"total_recharge" bson:"total_recharge"`     // 累计充值金额
+	LastRechargeAt int64   `json:"last_recharge_at" bson:"last_recharge_at"` // 最后充值时间
+
+	// 订单相关
+	OrderCount       int     `json:"order_count" bson:"order_count"`             // 总订单数
+	PaidOrderCount   int     `json:"paid_order_count" bson:"paid_order_count"`   // 已支付订单数
+	TotalConsumption float64 `json:"total_consumption" bson:"total_consumption"` // 累计消费金额
+	LastOrderAt      int64   `json:"last_order_at" bson:"last_order_at"`         // 最后下单时间
+
+	// 其他常用统计
+	RefundCount  int     `json:"refund_count" bson:"refund_count"`     // 退款次数
+	TotalRefund  float64 `json:"total_refund" bson:"total_refund"`     // 累计退款金额
+	InviteCount  int     `json:"invite_count" bson:"invite_count"`     // 成功邀请人数（冗余，方便查询）
+	LoginDays    int     `json:"login_days" bson:"login_days"`         // 累计登录天数
+	LastActiveAt int64   `json:"last_active_at" bson:"last_active_at"` // 最后活跃时间
+
+	// 可继续扩展...
 }
 
 // ResourceName 返回资源名称
