@@ -25,12 +25,15 @@ type Model struct {
 	model.Model `json:"_" bson:"_"`
 	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
-	ID      primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Checked bool               `json:"checked"  bson:"checked"`
-	Price   int64              `json:"price"  bson:"price"`
-	Values  []PropertySetting  `json:"values"  bson:"values"`
-	Name    string             `json:"name"  bson:"name"`
-	Desc    string             `json:"desc"  bson:"desc"`
+	ID           primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Checked      bool               `json:"checked"  bson:"checked"`
+	UserProperty int                `json:"user_property"  bson:"user_property"`
+	Price        int64              `json:"price"  bson:"price"`
+	Sales        int64              `json:"sales"  bson:"sales"`
+	Values       []PropertySetting  `json:"values"  bson:"values"`
+	Name         string             `json:"name"  bson:"name"`
+	Desc         string             `json:"desc"  bson:"desc"`
+	Icon         string             `json:"icon"  bson:"icon"`
 	// multiple_selection
 	MultipleSelection bool `json:"multiple_selection"  bson:"multiple_selection"`
 }
