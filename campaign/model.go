@@ -21,6 +21,8 @@ const (
 	TypeGift      = "gift"
 	TypeDelivery  = "delivery"
 	TypeRecharge  = "recharge"
+	TypeRegisterGift = "register_gift"
+	TypeRechargeGift = "recharge_gift"
 )
 
 const (
