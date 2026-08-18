@@ -67,6 +67,8 @@ type IdentityInfo struct {
 	PhoneHash string `json:"phone_hash" bson:"phone_hash"`
 	// 手机号加密
 	PhoneSec string `json:"phone_sec" bson:"phone_sec"`
+	// 新密文（primary AES）。读路径优先于 phone。
+	PhoneEnc string `json:"phone_enc,omitempty" bson:"phone_enc,omitempty"`
 	// 注册ip
 	RegisterIP string `json:"register_ip" bson:"register_ip"`
 	// 注册地区
