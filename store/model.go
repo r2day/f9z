@@ -130,6 +130,10 @@ type Model struct {
 	News int `json:"news" bson:"news"`
 	// 下单方式
 	PlaceOrderMode int `json:"place_order_mode" bson:"place_order_mode"`
+	// ScmConsumeEnabled 是否关联供应链并在制作完成时自动扣原料库存。默认 false：不关联、不扣料。
+	ScmConsumeEnabled bool `json:"scm_consume_enabled" bson:"scm_consume_enabled"`
+	// ScmBlockOnShortage 库存不足时是否阻断制作完成。默认 false：允许负库存并继续出餐。
+	ScmBlockOnShortage bool `json:"scm_block_on_shortage" bson:"scm_block_on_shortage"`
 }
 
 type FinanceConfig struct {
