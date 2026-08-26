@@ -141,6 +141,22 @@ type FinanceConfig struct {
 	WxPay string `json:"wx_pay"  bson:"wx_pay"`
 	// 银行支付
 	BankPay string `json:"bank_pay" bson:"bank_pay"`
+	// Channels POS 支付入口开关
+	Channels PayChannelFlags `json:"channels" bson:"channels"`
+}
+
+type PayChannelFlags struct {
+	Cash    bool `json:"cash" bson:"cash"`
+	WeChat  bool `json:"wechat" bson:"wechat"`
+	Balance bool `json:"balance" bson:"balance"`
+}
+
+func (f FinanceConfig) ResolvedChannels() PayChannelFlags {
+	c := f.Channels
+	if !c.Cash && !c.WeChat && !c.Balance {
+		return PayChannelFlags{Cash: true}
+	}
+	return c
 }
 
 type MenuConfig struct {

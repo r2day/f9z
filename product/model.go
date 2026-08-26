@@ -46,6 +46,7 @@ type Model struct {
 	UnitType        int     `json:"unit_type" bson:"unit_type"`
 	Sort            int     `json:"sort"`
 	Price           float64 `json:"price"`
+	OriginPrice     float64 `json:"origin_price" bson:"-"`
 	Unit            string  `json:"unit"`
 	MembershipPrice int     `json:"membership_price" bson:"membership_price"`
 

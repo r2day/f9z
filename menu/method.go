@@ -46,15 +46,13 @@ func (m *Model) GetProducts() ([]*product.Model, error) {
 			// 将该套餐的产品进行标识（但是不影响产品本身，只是在该类套餐中标识）
 			for _, p := range results {
 				p.CombID = m.ID.Hex()
-				// 套餐有多个组合，每个组合设置一组id
 				p.CombIndex = index
-				// 该类产品的
 				p.MaxPurchaseAllowed = i.Quantity
-				// TODO 套餐价格(一般会跟原商品价格存在差异，因此这里会重新设定价格，但是这个价格可能会在下单时，
-				// 根据商品id查询到的价格结果不一致，所以需要注意优化
-				p.Price = i.Price
-				// 将所有产品拼接
-				allResults = append(allResults, p) // 直接使用 allResults
+				p.OriginPrice = p.Price
+				if i.Price > 0 {
+					p.Price = i.Price
+				}
+				allResults = append(allResults, p)
 			}
 		}
 		// 当所有内容拼接完毕后返回

@@ -100,6 +100,10 @@ type StatusTimePoint struct {
 	PayAt int64 `json:"pay_at" bson:"pay_at"`
 	// 	PayedAt 支付成功时间
 	PayedAt int64 `json:"payed_at" bson:"payed_at"`
+	// MakingAt 进入制作中的时间（状态 2）
+	MakingAt int64 `json:"making_at" bson:"making_at"`
+	// ProduceAt 制作完成时间（状态 3）
+	ProduceAt int64 `json:"produce_at" bson:"produce_at"`
 	// 	ReviewAt 评价时间
 	ReviewAt int64 `json:"review_at" bson:"review_at"`
 	// 	CompletedAt 完成时间
