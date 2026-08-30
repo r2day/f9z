@@ -27,8 +27,10 @@ type Model struct {
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID       primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	Name     string             `json:"name"`
+	Desc     string             `json:"desc" bson:"desc"`
 	Sort     int                `json:"sort"`
 	Icon     string             `json:"icon"`
+	GoodsID  string             `json:"goods_id" bson:"goods_id"`
 	Products []string           `json:"products" bson:"products"`
 }
 
