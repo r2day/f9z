@@ -134,6 +134,8 @@ type Model struct {
 	ScmConsumeEnabled bool `json:"scm_consume_enabled" bson:"scm_consume_enabled"`
 	// ScmBlockOnShortage 库存不足时是否阻断制作完成。默认 false：允许负库存并继续出餐。
 	ScmBlockOnShortage bool `json:"scm_block_on_shortage" bson:"scm_block_on_shortage"`
+	// Platforms 本店开通的外卖/配送平台，可多选。取值见 transport 平台目录（meituan/eleme/uu/self 等）。
+	Platforms []string `json:"platforms" bson:"platforms"`
 }
 
 type FinanceConfig struct {
