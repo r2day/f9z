@@ -97,6 +97,8 @@ type Model struct {
 	ShopTimeInfo ShopTimeSetting `json:"shop_time_info" bson:"shop_time_info"`
 	// 门店电话
 	CallNumber string `json:"callNumber" bson:"callNumber"`
+	// Mobile 座机号（表单字段名沿用 mobile）
+	Mobile string `json:"mobile" bson:"mobile"`
 	// 地址
 	Lbs LbsInfo `json:"lbs" bson:"lbs"`
 	// 当前门店拥有的产品

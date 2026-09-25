@@ -39,8 +39,8 @@ type Model struct {
 	Condition Condition `json:"condition" bson:"condition"`
 
 	// ==================== 核心权益 ====================
-	DiscountRate     float64 `json:"discount_rate" bson:"discount_rate"`         // 折扣率（0.95 = 95折）
-	CashbackRate     float64 `json:"cashback_rate" bson:"cashback_rate"`         // 返现比例
+	DiscountRate     float64 `json:"discount_rate" bson:"discount_rate"`         // 折扣率百分点数（90 = 90% / 九折）
+	CashbackRate     float64 `json:"cashback_rate" bson:"cashback_rate"`         // 返现率百分点数（10 = 10%）
 	PointsMultiplier float64 `json:"points_multiplier" bson:"points_multiplier"` // 积分倍率（默认 1.0）
 
 	// ==================== 附加权益 ====================

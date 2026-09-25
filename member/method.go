@@ -2,13 +2,20 @@ package member
 
 import (
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (m *Model) GetByWxLoginID(id string) (*Model, error) {
+func (m *Model) GetByWxLoginID(id, merchantID string) (*Model, error) {
+	if merchantID == "" {
+		return nil, mongo.ErrNoDocuments
+	}
 
 	result := new(Model)
 	coll := m.Context.Handler.Collection(m.Context.Collection)
-	filter := bson.D{bson.E{Key: "identity.wx_login_id", Value: id}}
+	filter := bson.D{
+		bson.E{Key: "identity.wx_login_id", Value: id},
+		bson.E{Key: "_.meta.merchant_id", Value: merchantID},
+	}
 
 	// 获取数据列表
 	err := coll.FindOne(m.Context.Context, filter).Decode(result)
