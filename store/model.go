@@ -188,6 +188,9 @@ type TableLayout struct {
 	Rows   int `json:"rows" bson:"rows"`
 	Width  int `json:"width" bson:"width"`
 	Height int `json:"height" bson:"height"`
+	// QrDisplay is what the mini-program shows after a table QR scan:
+	// table_no (default), name, or id.
+	QrDisplay string `json:"qr_display" bson:"qr_display"`
 }
 
 type SeatConfig struct {
