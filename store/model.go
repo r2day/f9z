@@ -56,6 +56,17 @@ type LbsInfo struct {
 	Longitude float64 `json:"longitude"  bson:"longitude"`
 	Latitude  float64 `json:"latitude"  bson:"latitude"`
 	AreaName  string  `json:"areaName"  bson:"areaName"`
+	// Country 国家。目前只使用中国。
+	Country string `json:"country" bson:"country"`
+	// Province 省、自治区、直辖市
+	Province     string `json:"province" bson:"province"`
+	ProvinceCode string `json:"province_code" bson:"province_code"`
+	// City 地级市、自治州、地区，或直辖市的「市辖区」
+	City     string `json:"city" bson:"city"`
+	CityCode string `json:"city_code" bson:"city_code"`
+	// District 区、县或县级市
+	District     string `json:"district" bson:"district"`
+	DistrictCode string `json:"district_code" bson:"district_code"`
 }
 
 // ShopTimeSetting 营业时间
