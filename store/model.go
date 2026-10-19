@@ -156,6 +156,8 @@ type FinanceConfig struct {
 	WxPay string `json:"wx_pay"  bson:"wx_pay"`
 	// 银行支付
 	BankPay string `json:"bank_pay" bson:"bank_pay"`
+	// LakalaPay 拉卡拉密钥文档 id，对应 finance_keys_config。
+	LakalaPay string `json:"lakala_pay" bson:"lakala_pay,omitempty"`
 	// Channels POS 支付入口开关
 	Channels PayChannelFlags `json:"channels" bson:"channels"`
 }
@@ -164,14 +166,52 @@ type PayChannelFlags struct {
 	Cash    bool `json:"cash" bson:"cash"`
 	WeChat  bool `json:"wechat" bson:"wechat"`
 	Balance bool `json:"balance" bson:"balance"`
+	Lakala  bool `json:"lakala" bson:"lakala"`
+	// Default 是 cash|wechat|balance|lakala 之一。
+	Default string `json:"default,omitempty" bson:"default,omitempty"`
+}
+
+// enabledChannelKeys 稳定顺序：cash, wechat, lakala, balance。
+func enabledChannelKeys(c PayChannelFlags) []string {
+	var keys []string
+	if c.Cash {
+		keys = append(keys, "cash")
+	}
+	if c.WeChat {
+		keys = append(keys, "wechat")
+	}
+	if c.Lakala {
+		keys = append(keys, "lakala")
+	}
+	if c.Balance {
+		keys = append(keys, "balance")
+	}
+	return keys
 }
 
 func (f FinanceConfig) ResolvedChannels() PayChannelFlags {
 	c := f.Channels
-	if !c.Cash && !c.WeChat && !c.Balance {
-		return PayChannelFlags{Cash: true}
+	if !c.Cash && !c.WeChat && !c.Balance && !c.Lakala {
+		return PayChannelFlags{Cash: true, Default: "cash"}
+	}
+	enabled := enabledChannelKeys(c)
+	if len(enabled) == 1 {
+		c.Default = enabled[0]
+		return c
+	}
+	if !channelEnabled(enabled, c.Default) {
+		c.Default = enabled[0]
 	}
 	return c
+}
+
+func channelEnabled(enabled []string, key string) bool {
+	for _, item := range enabled {
+		if item == key {
+			return true
+		}
+	}
+	return false
 }
 
 type MenuConfig struct {
