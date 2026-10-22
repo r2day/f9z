@@ -46,7 +46,7 @@ func (m *Model) GetMonthlySummary(ctx context.Context, tenantID string) (map[str
 		log.Log(ctx).WithField("tenant_id", tenantID).WithError(err).Error("获取当月财务总结失败")
 		return nil, err
 	}
-	defer cursor.Close(ctx)
+	defer func() { _ = cursor.Close(ctx) }()
 
 	var results []bson.M
 	if err := cursor.All(ctx, &results); err != nil {
@@ -113,7 +113,7 @@ func (m *Model) GetLast7DaysTrend(ctx context.Context, tenantID string) ([]map[s
 		log.Log(ctx).WithError(err).Error("获取最近7天财务趋势失败")
 		return nil, err
 	}
-	defer cursor.Close(ctx)
+	defer func() { _ = cursor.Close(ctx) }()
 
 	var results []bson.M
 	if err := cursor.All(ctx, &results); err != nil {

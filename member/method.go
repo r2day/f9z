@@ -60,7 +60,7 @@ func (m *Model) GetLevelStatistics() ([]LevelStat, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer cursor.Close(m.Context.Context)
+	defer func() { _ = cursor.Close(m.Context.Context) }()
 
 	var results []LevelStat
 	if err = cursor.All(m.Context.Context, &results); err != nil {
