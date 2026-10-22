@@ -118,36 +118,50 @@ func TestIT_StoreFetchDataAndSaveOnCache(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	c, _ := gin.CreateTestContext(httptest.NewRecorder())
 	c.Request = httptest.NewRequest("GET", "/stores/nearby", nil)
-	// 请求带有商户 A 的标识，但函数并不按商户过滤
 	c.Request.Header.Set("MerchantID", "merchant-a")
 
 	counter, best, all, err := store.FetchDataAndSaveOnCache(c, 114.0300, 22.5400)
 	if err != nil {
 		t.Fatal(err)
 	}
-	// 现状：查询条件为空，返回了所有商户的门店（见 PR 问题 1）
-	if counter != 3 || len(all) != 3 {
+	// 只返回商户 A 的门店，即使商户 B 的门店离用户更近
+	if counter != 2 || len(all) != 2 {
 		t.Fatalf("counter=%d len=%d", counter, len(all))
 	}
-	if best.ID != nearB || !best.BestMatch {
-		t.Fatalf("最近门店应为商户 B 的门店: %+v", best)
+	if best.ID != nearA || !best.BestMatch {
+		t.Fatalf("最近门店应为商户 A 的门店: %+v", best)
 	}
 	for _, s := range all {
+		if s.ID == nearB {
+			t.Fatal("不应返回其他商户的门店")
+		}
 		if s.Distance <= 0 || s.Distance > 10 {
 			t.Fatalf("距离异常: %s %v", s.Name, s.Distance)
 		}
-		if s.ID == nearA && s.BestMatch {
-			t.Fatal("只有一个门店应标记为 BestMatch")
-		}
 	}
-	// 临时用户坐标在返回前被删除，只剩 3 个门店
-	if n := rdb.ZCard(ctx, "store_position").Val(); n != 3 {
-		t.Fatalf("store_position 成员数=%d", n)
+	// 临时用户坐标在返回前被删除；geo 数据按商户分 key
+	if n := rdb.ZCard(ctx, "store_position:merchant-a").Val(); n != 2 {
+		t.Fatalf("store_position:merchant-a 成员数=%d", n)
+	}
+	if n := rdb.ZCard(ctx, "store_position:merchant-b").Val(); n != 0 {
+		t.Fatalf("store_position:merchant-b 成员数=%d", n)
+	}
+	t.Cleanup(func() { rdb.Del(context.Background(), "store_position:merchant-a") })
+
+	// 没有商户标识时拒绝
+	c2, _ := gin.CreateTestContext(httptest.NewRecorder())
+	c2.Request = httptest.NewRequest("GET", "/stores/nearby", nil)
+	if _, _, _, err := store.FetchDataAndSaveOnCache(c2, 114.03, 22.54); !errors.Is(err, store.ErrNoMerchant) {
+		t.Fatalf("无商户应返回 ErrNoMerchant: %v", err)
+	}
+
+	// 商户 A 的近店写入缓存
+	if got, err := store.NewCache(ctx).Load("S-A1"); err != nil || got.Name != "A 近店" {
+		t.Fatalf("Load=%+v err=%v", got, err)
 	}
 	// 门店信息按 StoreID 写入缓存
-	got, err := store.NewCache(ctx).Load("S-B1")
-	if err != nil || got.Name != "B 最近店" || got.Distance <= 0 {
-		t.Fatalf("Load=%+v err=%v", got, err)
+	if _, err := store.NewCache(ctx).Load("S-B1"); !errors.Is(err, redis.Nil) {
+		t.Fatalf("其他商户门店不应写入缓存: %v", err)
 	}
 	if _, err := store.NewCache(ctx).Load("S-404"); !errors.Is(err, redis.Nil) {
 		t.Fatalf("不存在的门店应返回 redis.Nil: %v", err)

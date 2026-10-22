@@ -37,7 +37,16 @@ func init() {
 // GEOSEARCH store_pos FROMLONLAT 13 38 BYRADIUS 100 km ASC
 // GEOSEARCH store_position FROMLONLAT 114.03 23.54 BYRADIUS 7 km ASC
 func GetStoresByLocation(ctx context.Context, longitude, latitude float64) []string {
-	pos, err := db.RDB.GeoSearch(ctx, storePos, &redis.GeoSearchQuery{
+	return getStoresByLocation(ctx, storePos, longitude, latitude)
+}
+
+// merchantGeoKey 每个商户单独一个 geo key，避免不同商户的门店互相可见。
+func merchantGeoKey(merchant string) string {
+	return storePos + ":" + merchant
+}
+
+func getStoresByLocation(ctx context.Context, key string, longitude, latitude float64) []string {
+	pos, err := db.RDB.GeoSearch(ctx, key, &redis.GeoSearchQuery{
 		Longitude:  longitude,
 		Latitude:   latitude,
 		Sort:       "ASC", // 排序后返回最近的一个门店
@@ -53,9 +62,13 @@ func GetStoresByLocation(ctx context.Context, longitude, latitude float64) []str
 
 // AddStore geoadd store_pos 13.361389 38.115556 "store_01" 15.087269 37.502669 "store_02"
 func AddStore(ctx context.Context, stores []*Model) {
+	addStore(ctx, storePos, stores)
+}
+
+func addStore(ctx context.Context, key string, stores []*Model) {
 	for _, i := range stores {
 		// 将key 记录下来以便退出的时候进行删除
-		err := db.RDB.GeoAdd(ctx, storePos, &redis.GeoLocation{
+		err := db.RDB.GeoAdd(ctx, key, &redis.GeoLocation{
 			Name:      i.ID.Hex(),
 			Longitude: i.Lbs.Longitude,
 			Latitude:  i.Lbs.Latitude,
@@ -69,10 +82,14 @@ func AddStore(ctx context.Context, stores []*Model) {
 
 // AddUserLocationForTemporary geoadd store_pos 13.361389 38.115556 "store_01" 15.087269 37.502669 "store_02"
 func AddUserLocationForTemporary(ctx context.Context, long, lat float64) string {
+	return addUserLocationForTemporary(ctx, storePos, long, lat)
+}
+
+func addUserLocationForTemporary(ctx context.Context, key string, long, lat float64) string {
 	id := uuid.New()
 	randUserLocationId := id.String()
 	// 将key 记录下来以便退出的时候进行删除
-	err := db.RDB.GeoAdd(ctx, storePos, &redis.GeoLocation{
+	err := db.RDB.GeoAdd(ctx, key, &redis.GeoLocation{
 		Name:      randUserLocationId,
 		Longitude: long,
 		Latitude:  lat,
@@ -86,7 +103,11 @@ func AddUserLocationForTemporary(ctx context.Context, long, lat float64) string 
 // GetDistance Sicily Palermo Catania km
 // GetDistance geoadd store_pos 13.361389 38.115556 "store_01" 15.087269 37.502669 "store_02"
 func GetDistance(ctx context.Context, member1, member2 string, uint string) float64 {
-	dis, err := db.RDB.GeoDist(ctx, storePos, member1, member2, uint).Result()
+	return getDistance(ctx, storePos, member1, member2, uint)
+}
+
+func getDistance(ctx context.Context, key, member1, member2 string, uint string) float64 {
+	dis, err := db.RDB.GeoDist(ctx, key, member1, member2, uint).Result()
 	if err != nil {
 		log.WithField("member1", member1).
 			WithField("member2", member2).Error(err)
@@ -96,7 +117,11 @@ func GetDistance(ctx context.Context, member1, member2 string, uint string) floa
 
 // RemoveUserTemporaryLocation Sicily Palermo Catania km
 func RemoveUserTemporaryLocation(ctx context.Context, member string) int64 {
-	counter, err := db.RDB.ZRem(ctx, storePos, member).Result()
+	return removeUserTemporaryLocation(ctx, storePos, member)
+}
+
+func removeUserTemporaryLocation(ctx context.Context, key, member string) int64 {
+	counter, err := db.RDB.ZRem(ctx, key, member).Result()
 	if err != nil {
 		log.WithField("member", member).Error(err)
 	}
