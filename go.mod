@@ -5,7 +5,7 @@ go 1.26.10
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/google/uuid v1.6.0
-	github.com/open4go/log v0.0.22
+	github.com/open4go/log v0.0.25
 	github.com/open4go/model v0.0.24
 	github.com/open4go/req5rsp v0.1.54
 	github.com/r2day/db v0.3.5
