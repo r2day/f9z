@@ -20,15 +20,19 @@ type Line struct {
 }
 
 type Model struct {
-	model.Model `json:"_" bson:"_"`
-	ID          primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Code        string             `json:"code"`
-	StoreID     string             `json:"store_id" bson:"store_id"`
-	SupplierID  string             `json:"supplier_id" bson:"supplier_id"`
-	Status      string             `json:"status"`
-	ExpectAt    string             `json:"expect_at" bson:"expect_at"`
-	Lines       []Line             `json:"lines"`
-	Remark      string             `json:"remark"`
+	model.Model  `json:"_" bson:"_"`
+	ID           primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Code         string             `json:"code"`
+	StoreID      string             `json:"store_id" bson:"store_id"`
+	SupplierID   string             `json:"supplier_id" bson:"supplier_id"`
+	Status       string             `json:"status"`
+	ExpectAt     string             `json:"expect_at" bson:"expect_at"`
+	Lines        []Line             `json:"lines"`
+	BuyPlace     string             `json:"buy_place" bson:"buy_place"`
+	Quality      string             `json:"quality" bson:"quality"`
+	ReceiveTo    string             `json:"receive_to" bson:"receive_to"`
+	ReceivePlace string             `json:"receive_place" bson:"receive_place"`
+	Remark       string             `json:"remark"`
 }
 
 func (m *Model) ResourceName() string { return modelName }

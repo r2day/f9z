@@ -24,6 +24,7 @@ type Model struct {
 	LastCost          float64            `json:"last_cost" bson:"last_cost"`
 	AvgCost           float64            `json:"avg_cost" bson:"avg_cost"`
 	SafetyQty         float64            `json:"safety_qty" bson:"safety_qty"`
+	CapacityQty       float64            `json:"capacity_qty" bson:"capacity_qty"`
 	ShelfLifeDays     int                `json:"shelf_life_days" bson:"shelf_life_days"`
 	DefaultSupplierID string             `json:"default_supplier_id" bson:"default_supplier_id"`
 	Images            string             `json:"images"`
