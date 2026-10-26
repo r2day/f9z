@@ -86,7 +86,7 @@ type PriceInfo struct {
 	ReducedPrice string `json:"reduced_price" bson:"reduced_price"`
 	//Retail price 零售價(单位元）
 	RetailPrice string `json:"retail_price" bson:"retail_price"`
-	// 支付金额(单位：分）
+	// 支付金额(单位：元，取整；非分。展示/比价优先 RealPrice）
 	PayPrice int64 `json:"pay_price" bson:"pay_price"`
 	// 待支付金额(单位：元）这个金额是可能包含小数点
 	RealPrice float64 `json:"real_price" bson:"real_price"`
